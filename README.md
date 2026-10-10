@@ -14,14 +14,14 @@
 4. 选择要加载的 `.bip` 文件。
 5. 检查脚底接触、握持、穿模和循环衔接。
 
-加载器会保留目标 Figure、身高和肢长。不要向其他角色加载资源配套的 FIG，也不要使用 `#matchFileStruct` 或加载源 List 控制器，否则可能覆盖目标角色比例。
+加载器会恢复 BIP 中保存的 List 控制器动作，同时保留目标 Figure、身高和肢长。不要向其他角色加载资源配套的 FIG，也不要使用 `#matchFileStruct`，否则可能覆盖目标角色比例。
 
 仅支持 Autodesk Biped。普通 Bone、CAT 和 UE 骨架需要单独重定向。
 
 ## 校验
 
-发布文件 SHA-256：`9023205dc813234f584a72a328de0122bfc85d97aca7027b002c72981112c68a`
+发布文件 SHA-256：`b87d50962c90ab61947c962bd70c9465c4a3c337c6c8b87dd85f35fb9f2c600e`
 
-经 3ds Max 2021 验证：124 个 BIP、两套不同身高与肢长的目标 Biped，共 248 次加载全部成功，未发现缩放键变化。
+旧版已完成 124 个 BIP、两套不同身高与肢长目标 Biped 的比例检查。当前版本补齐 `#loadSubAnimControllers`，用于恢复生成器以 `#saveSubAnimControllers` 保存的动作层；仍需在 3ds Max 2021 对动作轨迹做复验。
 
 Autodesk 文档：[Biped Load and Save Methods](https://help.autodesk.com/cloudhelp/2025/ENU/MAXScript-Help/files/3ds-Max-Objects-and-Interfaces/MAXScript-Extensions/MAXScript-Extensions-in/Biped-MAXScript-Extensions/Biped-General-Topics/GUID-0BEE71B1-4C68-4419-959F-0BFBA7ED70B6.html)
