@@ -1,6 +1,7 @@
 /* FRAME safe BIP loader for 3ds Max 2021+
    Preserves the selected target Biped Figure.
-   Intentionally does NOT load FIG, match file structure, or load source List controllers.
+   Loads saved List-controller animation while preserving the target Figure.
+   Intentionally does NOT load FIG or match the source file structure.
 */
 global FRAME_BIP_FILE_OVERRIDE
 global FRAME_BIP_LOADER_DEFINE_ONLY
@@ -41,8 +42,10 @@ fn frameLoadBipPreserveFigure bipPath quiet:false =
     result = false
     try
     (
-        -- Preserve target Figure: no #matchFileStruct, no FIG, no #loadSubAnimControllers.
-        result = biped.loadBipFile masterController bipPath #noRedraw #retargetHeight #retargetLimbSizes
+        -- The exporter uses #saveSubAnimControllers, so the matching load flag is required
+        -- to restore animation stored in Biped List controllers. Figure structure stays intact:
+        -- no #matchFileStruct and no FIG load.
+        result = biped.loadBipFile masterController bipPath #noRedraw #retargetHeight #retargetLimbSizes #loadSubAnimControllers
     )
     catch
     (
